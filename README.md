@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-# star_calendar
-=======
+
 # star_calendar
 
 A new Flutter project.
