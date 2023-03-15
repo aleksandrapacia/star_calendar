@@ -11,12 +11,27 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[300],
-      appBar: AppBar(
-        title: const Text('Star Calendar'),
-        elevation: 0,
-        backgroundColor: Colors.blue[400],
-      ),
-    );
+        backgroundColor: Colors.blue[300],
+        appBar: AppBar(
+          title: const Text('Star Calendar'),
+          elevation: 0,
+          backgroundColor: Colors.blue[400],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.business),
+              label: 'Business',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              label: 'School',
+            ),
+          ],
+        ));
   }
 }
