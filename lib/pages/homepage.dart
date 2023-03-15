@@ -21,15 +21,15 @@ class _MyHomePageState extends State<MyHomePage> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
-              label: 'Home',
+              label: 'Notes',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.business),
-              label: 'Business',
+              label: 'Calendar',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.school),
-              label: 'School',
+              label: 'Log in',
             ),
           ],
         ));
