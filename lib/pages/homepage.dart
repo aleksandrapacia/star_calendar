@@ -20,11 +20,11 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.notes_outlined),
               label: 'Notes',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.business),
+              icon: Icon(Icons.calendar_view_day_outlined),
               label: 'Calendar',
             ),
             BottomNavigationBarItem(
