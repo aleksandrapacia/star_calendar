@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: 'Calendar',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+              icon: Icon(Icons.login),
               label: 'Log in',
             ),
           ],
