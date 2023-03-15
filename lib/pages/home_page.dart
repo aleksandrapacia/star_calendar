@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:star_calendar/pages/calendar_page.dart';
+import 'package:star_calendar/pages/login_page.dart';
+import 'package:star_calendar/pages/notes_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -8,14 +11,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  PageController _controlPages = PageController();
+  List<Widget> _screens = [NotesPage(), CalendarPage(), LoginPage()];
+  void _onPageChanged(int index) {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue[300],
-        appBar: AppBar(
-          title: const Text('Star Calendar'),
-          elevation: 0,
-          backgroundColor: Colors.blue[400],
+        body: PageView(
+          controller: _controlPages,
+          children: _screens,
+          onPageChanged: _onPageChanged,
+          physics: const NeverScrollableScrollPhysics(),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
