@@ -16,7 +16,14 @@ class _MyHomePageState extends State<MyHomePage> {
   PageController _controlPages = PageController();
   // ignore: prefer_const_constructors
   List<Widget> _screens = [NotesPage(), CalendarPage(), LoginPage()];
-  void _onPageChanged(int index) {}
+  int selectedIndex = 0;
+
+  void _onPageChanged(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
   void _onItemTapped(int selectedIndex) {
     _controlPages.jumpToPage(selectedIndex);
   }
@@ -33,16 +40,28 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: BottomNavigationBar(
           onTap: _onItemTapped,
           items: [
+            // index = 0
             BottomNavigationBarItem(
-              icon: Icon(Icons.notes_outlined),
+              icon: Icon(
+                Icons.notes_outlined,
+                color: selectedIndex == 0 ? Colors.blue : Colors.grey,
+              ),
               label: 'Notes',
             ),
+            // index = 1
             BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_view_day_outlined),
+              icon: Icon(
+                Icons.calendar_view_day_outlined,
+                color: selectedIndex == 1 ? Colors.blue : Colors.grey,
+              ),
               label: 'Calendar',
             ),
+            // index = 2
             BottomNavigationBarItem(
-              icon: Icon(Icons.login),
+              icon: Icon(
+                Icons.login,
+                color: selectedIndex == 2 ? Colors.blue : Colors.grey,
+              ),
               label: 'Log in',
             ),
           ],
