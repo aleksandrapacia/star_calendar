@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields, prefer_const_constructors, duplicate_ignore, avoid_print, sort_child_properties_last, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:star_calendar/pages/calendar_page.dart';
 import 'package:star_calendar/pages/login_page.dart';
@@ -12,8 +14,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   PageController _controlPages = PageController();
+  // ignore: prefer_const_constructors
   List<Widget> _screens = [NotesPage(), CalendarPage(), LoginPage()];
   void _onPageChanged(int index) {}
+  void _onItemTapped(int selectedIndex) {
+    _controlPages.jumpToPage(selectedIndex);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,10 +28,11 @@ class _MyHomePageState extends State<MyHomePage> {
           controller: _controlPages,
           children: _screens,
           onPageChanged: _onPageChanged,
-          physics: const NeverScrollableScrollPhysics(),
+          physics: NeverScrollableScrollPhysics(),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+          onTap: _onItemTapped,
+          items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.notes_outlined),
               label: 'Notes',
