@@ -68,9 +68,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onTap: _onItemTapped,
         currentIndex: selectedIndex,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: null,
-      ),
+      floatingActionButton:
+          FloatingActionButton(onPressed: null, child: Icon(Icons.add)),
     );
   }
 }
