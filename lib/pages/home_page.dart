@@ -38,7 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
           physics: NeverScrollableScrollPhysics(),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          onTap: _onItemTapped,
           items: [
             // index = 0
             BottomNavigationBarItem(
@@ -65,6 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
               label: 'Log in',
             ),
           ],
+          selectedItemColor: Colors.green,
+          onTap: _onItemTapped,
+          currentIndex: selectedIndex,
         ));
   }
 }
