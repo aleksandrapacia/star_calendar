@@ -70,7 +70,15 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           showDialog(
               context: context,
-              builder: (context) => AlertDialog(title: Text('Form')));
+              builder: (context) => AlertDialog(
+                  title: Text('Form'),
+                  content: Column(
+                    children: [
+                      Text("What did you see?"),
+                      Text("When did you see it?"),
+                      Text("How did you see it?")
+                    ],
+                  )));
         },
         child: Icon(Icons.add),
       ),
