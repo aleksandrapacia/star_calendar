@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:star_calendar/pages/calendar_page.dart';
 import 'package:star_calendar/pages/login_page.dart';
@@ -12,7 +14,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   PageController _controlPages = PageController();
-  // ignore: prefer_const_constructors
   List<Widget> _screens = [NotesPage(), CalendarPage(), LoginPage()];
   int selectedIndex = 0;
 
@@ -71,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
           showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                  title: Text('Form'),
+                  title: Center(child: Text('Form')),
                   content: Column(
                     children: [
                       Padding(padding: EdgeInsets.all(10)),
