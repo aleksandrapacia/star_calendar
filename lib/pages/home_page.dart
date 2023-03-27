@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:star_calendar/pages/calendar_page.dart';
 import 'package:star_calendar/pages/login_page.dart';
 import 'package:star_calendar/pages/notes_page.dart';
+import 'package:star_calendar/pages/util/form_box.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -17,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   // ignore: prefer_const_constructors
   List<Widget> _screens = [NotesPage(), CalendarPage(), LoginPage()];
   int selectedIndex = 0;
-
+  final controller_1 = TextEditingController();
   void _onPageChanged(int index) {
     setState(() {
       selectedIndex = index;
@@ -27,6 +28,8 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onItemTapped(int selectedIndex) {
     _controlPages.jumpToPage(selectedIndex);
   }
+
+  void displayForm() {}
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: selectedIndex,
       ),
       floatingActionButton:
-          FloatingActionButton(onPressed: null, child: Icon(Icons.add)),
+          FloatingActionButton(onPressed: displayForm, child: Icon(Icons.add)),
     );
   }
 }
