@@ -18,7 +18,7 @@ Map<int, Color> color = {
   900: Color.fromRGBO(4, 131, 184, 1),
 };
 
-MaterialColor myColor = MaterialColor(0xFFa1cfc7, color);
+MaterialColor myColor = MaterialColor(0xFFb37efc, color);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

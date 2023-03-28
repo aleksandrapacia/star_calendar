@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Log in',
           ),
         ],
-        selectedItemColor: Color.fromARGB(255, 166, 0, 255),
+        selectedItemColor: Color.fromARGB(160, 0, 0, 0),
         onTap: _onItemTapped,
         currentIndex: selectedIndex,
       ),
