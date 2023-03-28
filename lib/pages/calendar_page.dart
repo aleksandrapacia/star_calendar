@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//TODO: find calendar package
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
 
@@ -11,9 +12,7 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-      title: const Text('Calendar'),
-      centerTitle: true,
-    ));
+      appBar: AppBar(title: const Text('Calendar'), centerTitle: true),
+    );
   }
 }

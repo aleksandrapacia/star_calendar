@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+//TODO: create data base for each text field and store it
+//TODO: how to store it?
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
 
