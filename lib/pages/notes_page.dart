@@ -39,6 +39,7 @@ class _NotesPageState extends State<NotesPage> {
                     )));
           },
           child: Icon(Icons.add),
+          backgroundColor: Colors.tealAccent,
         ),
         appBar: AppBar(
           title: const Text('Notes'),
