@@ -31,14 +31,24 @@ class _NotesPageState extends State<NotesPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
                                 const Padding(
-                                  padding: EdgeInsets.all(10),
-                                  child: TextField(
-                                    decoration: InputDecoration(
+                                    padding: EdgeInsets.all(10),
+                                    child: TextField(
+                                        decoration: InputDecoration(
                                       border: OutlineInputBorder(),
                                       hintText: 'What did you see?',
-                                    ),
-                                  ),
-                                )
+                                    ))),
+                                const Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: TextField(
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: 'When did you see it?'))),
+                                const Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: TextField(
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: 'How did you see it?'))),
                               ]),
                         )
                       ],
