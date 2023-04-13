@@ -21,18 +21,26 @@ class _NotesPageState extends State<NotesPage> {
                 context: context,
                 builder: (context) => AlertDialog(
                     title: Center(child: Text('Form')),
-                    contentPadding: EdgeInsets.all(10),
+                    contentPadding: EdgeInsets.all(30),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
                     content: Column(
                       children: [
-                        //Text("What did you see?"),
-                        Text('What did you see?'),
-                        TextField(),
-                        Text("When did you see it?"),
-                        TextField(),
-                        Text("How did you see it?"),
-                        TextField(),
+                        SingleChildScrollView(
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      hintText: 'What did you see?',
+                                    ),
+                                  ),
+                                )
+                              ]),
+                        )
                       ],
                     )));
           },
