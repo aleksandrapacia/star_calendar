@@ -24,35 +24,39 @@ class _NotesPageState extends State<NotesPage> {
                     contentPadding: EdgeInsets.all(30),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    content: Column(
-                      children: [
-                        SingleChildScrollView(
+                    content: Column(children: [
+                      SingleChildScrollView(
                           child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                const Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: TextField(
-                                        decoration: InputDecoration(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                border: OutlineInputBorder(),
+                                hintText: 'What did you see?',
+                              ))),
+                          const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: TextField(
+                                  decoration: InputDecoration(
                                       border: OutlineInputBorder(),
-                                      hintText: 'What did you see?',
-                                    ))),
-                                const Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: TextField(
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            hintText: 'When did you see it?'))),
-                                const Padding(
-                                    padding: EdgeInsets.all(10),
-                                    child: TextField(
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            hintText: 'How did you see it?'))),
-                              ]),
-                        )
-                      ],
-                    )));
+                                      hintText: 'When did you see it?'))),
+                          const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: TextField(
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      hintText: 'How did you see it?'))),
+                          const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: TextButton(
+                                onPressed: null,
+                                child: const Text("Admit form"),
+                              ))
+                        ],
+                      )),
+                    ])));
           },
           child: Icon(Icons.add),
           backgroundColor: Colors.tealAccent,
