@@ -21,19 +21,17 @@ class _NotesPageState extends State<NotesPage> {
                 context: context,
                 builder: (context) => AlertDialog(
                     title: Center(child: Text('Form')),
+                    contentPadding: EdgeInsets.all(10),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
                     content: Column(
                       children: [
-                        Padding(padding: EdgeInsets.all(10)),
-                        Text("What did you see?"),
-                        Padding(padding: EdgeInsets.all(10)),
+                        //Text("What did you see?"),
+                        Text('What did you see?'),
                         TextField(),
-                        Padding(padding: EdgeInsets.all(10)),
                         Text("When did you see it?"),
-                        Padding(padding: EdgeInsets.all(10)),
                         TextField(),
-                        Padding(padding: EdgeInsets.all(10)),
                         Text("How did you see it?"),
-                        Padding(padding: EdgeInsets.all(10)),
                         TextField(),
                       ],
                     )));
