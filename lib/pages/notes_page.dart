@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:star_calendar/main.dart';
 
 //TODO: create data base for each text field and store it
 //TODO: how to store it?
@@ -50,9 +51,17 @@ class _NotesPageState extends State<NotesPage> {
                                       hintText: 'How did you see it?'))),
                           const Padding(
                               padding: EdgeInsets.all(10),
-                              child: TextButton(
+                              //TODO: style button
+                              child: ElevatedButton(
                                 onPressed: null,
-                                child: const Text("Admit form"),
+                                style: const ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStatePropertyAll<Color>(
+                                            Colors.tealAccent)),
+                                child: Text(
+                                  "Admit form",
+                                  selectionColor: Colors.amber,
+                                ),
                               ))
                         ],
                       )),
