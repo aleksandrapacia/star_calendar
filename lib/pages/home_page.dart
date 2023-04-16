@@ -13,8 +13,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  PageController _controlPages = PageController();
-  List<Widget> _screens = [NotesPage(), CalendarPage(), LoginPage()];
+  final PageController _controlPages = PageController();
+  final List<Widget> _screens = [NotesPage(), CalendarPage(), LoginPage()];
   int selectedIndex = 0;
 
   void _onPageChanged(int index) {
@@ -32,9 +32,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: PageView(
         controller: _controlPages,
-        children: _screens,
         onPageChanged: _onPageChanged,
         physics: NeverScrollableScrollPhysics(),
+        children: _screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
