@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:star_calendar/util/obs_tile.dart';
 
 //TODO: create data base for each text field and store it
 //TODO: how to store it?
@@ -12,6 +13,9 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> {
+  //bool isVisible = false;
+
+  final _textController = TextEditingController();
   void _onFabTap(BuildContext context) {
     showDialog(
       context: context,
@@ -29,13 +33,18 @@ class _NotesPageState extends State<NotesPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(10),
                     child: TextField(
+                      controller: _textController,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'What did you see?',
-                      ),
+                          border: OutlineInputBorder(),
+                          hintText: "whatInf",
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                _textController.clear();
+                              },
+                              icon: const Icon(Icons.clear))),
                     ),
                   ),
                   const Padding(
@@ -59,9 +68,9 @@ class _NotesPageState extends State<NotesPage> {
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: ElevatedButton(
-                      onPressed: () {
-                        print('xd');
-                      },
+                      onPressed: () {},
+                      //createNewObs;
+
                       style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
                       ),
@@ -85,6 +94,13 @@ class _NotesPageState extends State<NotesPage> {
         backgroundColor: Colors.tealAccent,
         child: Icon(Icons.add),
       ),
+      body: ListView.builder(itemBuilder: (context, index) {
+        return ObsTile(
+          whatInf: _textController.text,
+          whenInf: _textController.text,
+          howInf: _textController.text,
+        );
+      }),
       appBar: AppBar(
         title: const Text('Notes'),
         centerTitle: true,
