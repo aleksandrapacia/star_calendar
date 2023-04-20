@@ -12,7 +12,7 @@ class ObsTile extends StatelessWidget {
     required this.whatInf,
     required this.whenInf,
     required this.howInf,
-    required this.deleteFunction,
+    //required this.deleteFunction,
   });
 
   @override

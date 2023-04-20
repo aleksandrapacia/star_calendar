@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_const
 
 import 'package:flutter/material.dart';
-import 'package:star_calendar/util/obs_tile.dart';
 
 //TODO: create data base for each text field and store it
 //TODO: how to store it?
@@ -39,7 +38,7 @@ class _NotesPageState extends State<NotesPage> {
                       controller: _textController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: "whatInf",
+                          hintText: "What did you see?",
                           suffixIcon: IconButton(
                               onPressed: () {
                                 _textController.clear();
@@ -94,13 +93,6 @@ class _NotesPageState extends State<NotesPage> {
         backgroundColor: Colors.tealAccent,
         child: Icon(Icons.add),
       ),
-      body: ListView.builder(itemBuilder: (context, index) {
-        return ObsTile(
-          whatInf: _textController.text,
-          whenInf: _textController.text,
-          howInf: _textController.text,
-        );
-      }),
       appBar: AppBar(
         title: const Text('Notes'),
         centerTitle: true,
