@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:star_calendar/util/obs_tile.dart';
 
 //TODO: create data base for each text field and store it
 //TODO: how to store it?
@@ -96,6 +97,15 @@ class _NotesPageState extends State<NotesPage> {
       appBar: AppBar(
         title: const Text('Notes'),
         centerTitle: true,
+      ),
+      body: ListView(
+        children: [
+          ObsTile(
+            whatInf: "Venus",
+            whenInf: "22.04.2023r.",
+            howInf: "telescope",
+          ),
+        ],
       ),
     );
   }

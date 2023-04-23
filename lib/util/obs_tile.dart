@@ -12,7 +12,6 @@ class ObsTile extends StatelessWidget {
     required this.whatInf,
     required this.whenInf,
     required this.howInf,
-    //required this.deleteFunction,
   });
 
   @override
@@ -31,9 +30,10 @@ class ObsTile extends StatelessWidget {
             ],
           ),
           child: Container(
-            color: Colors.tealAccent,
-            child: Text(whatInf),
-          )),
+              color: Colors.tealAccent,
+              child: Column(
+                children: [Text(whatInf), Text(whenInf), Text(howInf)],
+              ))),
     );
   }
 }
