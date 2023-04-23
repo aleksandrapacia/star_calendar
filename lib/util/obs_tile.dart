@@ -25,15 +25,21 @@ class ObsTile extends StatelessWidget {
               SlidableAction(
                   onPressed: deleteFunction,
                   icon: Icons.delete,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(5),
                   backgroundColor: Colors.red.shade300),
             ],
           ),
-          child: Container(
-              color: Colors.tealAccent,
-              child: Column(
-                children: [Text(whatInf), Text(whenInf), Text(howInf)],
-              ))),
+          child: Center(
+            child: Container(
+                width: 1000,
+                decoration: BoxDecoration(
+                  color: Colors.tealAccent,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: Column(
+                  children: [Text(whatInf), Text(whenInf), Text(howInf)],
+                )),
+          )),
     );
   }
 }
