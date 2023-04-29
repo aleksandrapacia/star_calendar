@@ -17,7 +17,7 @@ class ObsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(20),
       child: Slidable(
           endActionPane: ActionPane(
             motion: const StretchMotion(),
@@ -36,8 +36,24 @@ class ObsTile extends StatelessWidget {
                   color: Colors.tealAccent,
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: Column(
-                  children: [Text(whatInf), Text(whenInf), Text(howInf)],
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(whatInf),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(whenInf),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(howInf),
+                      )
+                    ],
+                  ),
                 )),
           )),
     );
