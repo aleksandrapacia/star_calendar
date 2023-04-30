@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_const
 
 import 'package:flutter/material.dart';
+import 'package:star_calendar/util/button.dart';
 import 'package:star_calendar/util/obs_tile.dart';
 
 //TODO: create data base for each text field and store it
@@ -14,6 +15,9 @@ class NotesPage extends StatefulWidget {
 
 class _NotesPageState extends State<NotesPage> {
   //bool isVisible = false;
+  List obsList = [
+    ["Venus", "Today", "Telescope"],
+  ];
 
   final _textController = TextEditingController();
   void _onFabTap(BuildContext context) {
@@ -31,7 +35,7 @@ class _NotesPageState extends State<NotesPage> {
           children: [
             SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Padding(
                     padding: EdgeInsets.all(10),
@@ -65,18 +69,16 @@ class _NotesPageState extends State<NotesPage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      //createNewObs;
-
-                      style: ElevatedButton.styleFrom(
-                        shape: StadiumBorder(),
-                      ),
-                      child: Text("Add new observation"),
-                    ),
-                  )
+                  // button 1
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      // button add
+                      MyButton(text: "Save", onPressed: () {}),
+                      // button cancel
+                      MyButton(text: "Cancel", onPressed: () {}),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -86,6 +88,7 @@ class _NotesPageState extends State<NotesPage> {
     );
   }
 
+  // 11:08
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,15 +101,15 @@ class _NotesPageState extends State<NotesPage> {
         title: const Text('Notes'),
         centerTitle: true,
       ),
-      body: ListView(
-        children: [
-          ObsTile(
-            whatInf: "Venus",
-            whenInf: "22.04.2023r.",
-            howInf: "telescope",
-          ),
-        ],
-      ),
+      body: ListView.builder(
+          itemCount: obsList.length,
+          itemBuilder: (context, index) {
+            return ObsTile(
+              whatInf: obsList[index][0],
+              whenInf: obsList[index][1],
+              howInf: obsList[index][2],
+            );
+          }),
     );
   }
 }
