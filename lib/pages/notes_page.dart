@@ -40,7 +40,6 @@ class _NotesPageState extends State<NotesPage> {
                   Padding(
                     padding: EdgeInsets.all(10),
                     child: TextField(
-                      controller: _textController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           hintText: "What did you see?",
@@ -51,21 +50,33 @@ class _NotesPageState extends State<NotesPage> {
                               icon: const Icon(Icons.clear))),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(10),
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'When did you see it?',
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            _textController.clear();
+                          },
+                          icon: const Icon(Icons.clear),
+                        ),
                       ),
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(10),
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'How did you see it?',
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            _textController.clear();
+                          },
+                          icon: const Icon(Icons.clear),
+                        ),
                       ),
                     ),
                   ),
