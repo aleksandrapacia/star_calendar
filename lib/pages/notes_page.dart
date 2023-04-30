@@ -75,6 +75,8 @@ class _NotesPageState extends State<NotesPage> {
                     children: [
                       // button add
                       MyButton(text: "Save", onPressed: () {}),
+                      // space
+                      const SizedBox(width: 40),
                       // button cancel
                       MyButton(text: "Cancel", onPressed: () {}),
                     ],
