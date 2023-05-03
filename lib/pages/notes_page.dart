@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:star_calendar/util/dialog_box.dart';
 import 'package:star_calendar/util/obs_tile.dart';
 
-// check it out: https://medium.com/flutter-senior/complex-list-editors-without-state-management-in-flutter-33408c35bac7
-
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
 
@@ -39,12 +37,6 @@ class _NotesPageState extends State<NotesPage> {
         // textController.clear() ;
       },
     );
-  }
-
-  void obsSeen(bool? value, int index) {
-    setState(() {
-      obsList[index][1] = !obsList[index][1];
-    });
   }
 
   void _onFabTap(BuildContext context) {
@@ -85,7 +77,6 @@ class _NotesPageState extends State<NotesPage> {
             whenInf: obsList[index][1],
             howInf: obsList[index][2],
             observSeen: obsList[index][3],
-            onChanged: (value) => obsSeen,
           );
         },
       ),
