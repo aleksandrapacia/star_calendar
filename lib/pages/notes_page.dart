@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:star_calendar/util/dialog_box.dart';
 import 'package:star_calendar/util/obs_tile.dart';
 
-//TODO: create data base for each text field and store it
-//TODO: how to store it?
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
 
@@ -15,22 +13,53 @@ class NotesPage extends StatefulWidget {
 
 class _NotesPageState extends State<NotesPage> {
   // text controller
-  final textController = TextEditingController();
+  final _textController = TextEditingController();
+  final _secondTextController = TextEditingController();
+  final _thirdTextController = TextEditingController();
   // list of items it a tile
+  // ????
   List obsList = [
-    ["Venus", "Today", "Telescope"],
+    //  0       1         2        3
+    ["Hello", "Hi", "What is up", false]
   ];
 
-  final _textController = TextEditingController();
-  void _onFabTap(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return DialogBox(textController: textController);
-        });
+  // saving new task
+  void saveObs() {
+    setState(
+      () {
+        obsList.add(
+          [
+            _textController,
+            _secondTextController,
+            _thirdTextController,
+          ],
+        );
+        _textController.clear();
+      },
+    );
   }
 
-  // 11:08
+  void obsSeen(bool? value, int index) {
+    setState(() {
+      obsList[index][1] = !obsList[index][1];
+    });
+  }
+
+  void _onFabTap(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DialogBox(
+          textController: _textController,
+          secondTextController: _secondTextController,
+          thirdTextController: _thirdTextController,
+          onSave: saveObs,
+          onCancel: () => Navigator.of(context).pop(),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,14 +73,20 @@ class _NotesPageState extends State<NotesPage> {
         centerTitle: true,
       ),
       body: ListView.builder(
-          itemCount: obsList.length,
-          itemBuilder: (context, index) {
-            return ObsTile(
-              whatInf: obsList[index][0],
-              whenInf: obsList[index][1],
-              howInf: obsList[index][2],
-            );
-          }),
+        itemCount: obsList.length,
+        //shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemBuilder: (context, index) {
+          return ObsTile(
+            // 26:25
+            whatInf: obsList[index][0],
+            whenInf: obsList[index][1],
+            howInf: obsList[index][2],
+            observSeen: obsList[index][3],
+            onChanged: (value) => obsSeen,
+          );
+        },
+      ),
     );
   }
 }
