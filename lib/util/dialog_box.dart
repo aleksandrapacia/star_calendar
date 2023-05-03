@@ -3,9 +3,9 @@ import 'package:star_calendar/util/button.dart';
 
 class DialogBox extends StatelessWidget {
   //
-  final textController;
-  final secondTextController;
-  final thirdTextController;
+  TextEditingController textController = TextEditingController();
+  TextEditingController secondTextController = TextEditingController();
+  TextEditingController thirdTextController = TextEditingController();
 
   //TODO: read about VoidCallback
   VoidCallback onSave;
@@ -13,11 +13,11 @@ class DialogBox extends StatelessWidget {
 
   DialogBox({
     super.key,
+    required this.onSave,
+    required this.onCancel,
     required this.textController,
     required this.secondTextController,
     required this.thirdTextController,
-    required this.onSave,
-    required this.onCancel,
   });
 
   @override

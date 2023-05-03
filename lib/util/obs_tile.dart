@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ObsTile extends StatelessWidget {
-  final String? whatInf;
-  final String? whenInf;
-  final String? howInf;
+  final String whatInf;
+  final String whenInf;
+  final String howInf;
   final bool observSeen;
   Function(bool?)? onChanged;
   Function(BuildContext)? deleteFunction;

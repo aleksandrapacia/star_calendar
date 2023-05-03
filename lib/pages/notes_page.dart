@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:star_calendar/util/dialog_box.dart';
 import 'package:star_calendar/util/obs_tile.dart';
 
+// check it out: https://medium.com/flutter-senior/complex-list-editors-without-state-management-in-flutter-33408c35bac7
+
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
 
@@ -13,11 +15,10 @@ class NotesPage extends StatefulWidget {
 
 class _NotesPageState extends State<NotesPage> {
   // text controller
-  final _textController = TextEditingController();
-  final _secondTextController = TextEditingController();
-  final _thirdTextController = TextEditingController();
-  // list of items it a tile
-  // ????
+  final TextEditingController _textController = TextEditingController();
+  final TextEditingController _secondTextController = TextEditingController();
+  final TextEditingController _thirdTextController = TextEditingController();
+
   List obsList = [
     //  0       1         2        3
     ["Hello", "Hi", "What is up", false]
@@ -29,12 +30,13 @@ class _NotesPageState extends State<NotesPage> {
       () {
         obsList.add(
           [
-            _textController,
-            _secondTextController,
-            _thirdTextController,
+            _textController.text,
+            _secondTextController.text,
+            _thirdTextController.text,
+            false
           ],
         );
-        _textController.clear();
+        // textController.clear() ;
       },
     );
   }
@@ -50,11 +52,11 @@ class _NotesPageState extends State<NotesPage> {
       context: context,
       builder: (context) {
         return DialogBox(
+          onSave: saveObs,
+          onCancel: () => Navigator.of(context).pop(),
           textController: _textController,
           secondTextController: _secondTextController,
           thirdTextController: _thirdTextController,
-          onSave: saveObs,
-          onCancel: () => Navigator.of(context).pop(),
         );
       },
     );
