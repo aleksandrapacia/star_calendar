@@ -56,6 +56,14 @@ class DialogBox extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: TextField(
                     controller: secondTextController,
+                    onTap: () async {
+                      DateTime? pickeddate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(2000),
+                        lastDate: DateTime(2101),
+                      );
+                    },
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText: 'When did you see it?',
