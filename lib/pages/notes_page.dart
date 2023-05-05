@@ -46,7 +46,11 @@ class _NotesPageState extends State<NotesPage> {
       builder: (context) {
         return DialogBox(
           onSave: saveObs,
-          onCancel: () => Navigator.of(context).pop(),
+          onCancel: () => [
+            _textController.clear(),
+            _secondTextController.clear(),
+            _thirdTextController.clear()
+          ],
           textController: _textController,
           secondTextController: _secondTextController,
           thirdTextController: _thirdTextController,
@@ -74,6 +78,7 @@ class _NotesPageState extends State<NotesPage> {
         itemBuilder: (context, index) {
           return ObsTile(
             // 26:25
+
             whatInf: obsList[index][0],
             whenInf: obsList[index][1],
             howInf: obsList[index][2],
