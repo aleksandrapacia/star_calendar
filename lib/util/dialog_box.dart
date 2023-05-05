@@ -59,8 +59,6 @@ class _DialogBoxState extends State<DialogBox> {
                   ),
                 ),
                 Padding(
-                  //TODO: do something to make text controller equal to the value of picked date so
-                  // equal to the sate of secondTextController
                   padding: const EdgeInsets.all(10),
                   child: TextField(
                     controller: widget.secondTextController,
@@ -116,7 +114,7 @@ class _DialogBoxState extends State<DialogBox> {
                     // button add
                     MyButton(text: "Save", onPressed: widget.onSave),
                     // do something to make it symmetrical
-                    const SizedBox(width: 40),
+                    const SizedBox(width: 20),
                     // button cancel
                     MyButton(text: "Cancel", onPressed: widget.onCancel),
                   ],

@@ -34,7 +34,15 @@ class _NotesPageState extends State<NotesPage> {
             false
           ],
         );
-        // textController.clear() ;
+        // TODO: dismissing text field data after + automatic exit from dialog box
+        // 1. button 'cancel' is clicked
+        // 2. button 'save' is clicked
+        [
+          _textController.clear(),
+          _secondTextController.clear(),
+          _thirdTextController.clear()
+        ];
+        Navigator.of(context).pop();
       },
     );
   }
@@ -49,7 +57,8 @@ class _NotesPageState extends State<NotesPage> {
           onCancel: () => [
             _textController.clear(),
             _secondTextController.clear(),
-            _thirdTextController.clear()
+            _thirdTextController.clear(),
+            Navigator.of(context).pop()
           ],
           textController: _textController,
           secondTextController: _secondTextController,
