@@ -111,7 +111,7 @@ class _DialogBoxState extends State<DialogBox> {
                 ),
                 // button 1
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // button add
                     MyButton(text: "Save", onPressed: widget.onSave),
