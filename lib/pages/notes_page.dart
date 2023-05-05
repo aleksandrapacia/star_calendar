@@ -15,6 +15,7 @@ class _NotesPageState extends State<NotesPage> {
   // text controller
   final TextEditingController _textController = TextEditingController();
   final TextEditingController _secondTextController = TextEditingController();
+  final TextEditingController _secondTimeController = TextEditingController();
   final TextEditingController _thirdTextController = TextEditingController();
 
   List obsList = [
@@ -30,16 +31,16 @@ class _NotesPageState extends State<NotesPage> {
           [
             _textController.text,
             _secondTextController.text,
+            _secondTimeController.text,
             _thirdTextController.text,
             false
           ],
         );
-        // TODO: dismissing text field data after + automatic exit from dialog box
-        // 1. button 'cancel' is clicked
-        // 2. button 'save' is clicked
+
         [
           _textController.clear(),
           _secondTextController.clear(),
+          _secondTimeController.clear(),
           _thirdTextController.clear()
         ];
         Navigator.of(context).pop();
@@ -62,6 +63,7 @@ class _NotesPageState extends State<NotesPage> {
           ],
           textController: _textController,
           secondTextController: _secondTextController,
+          secondTimeController: _secondTimeController,
           thirdTextController: _thirdTextController,
         );
       },

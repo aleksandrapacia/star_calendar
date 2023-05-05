@@ -6,6 +6,7 @@ import 'package:star_calendar/util/button.dart';
 class DialogBox extends StatefulWidget {
   TextEditingController textController = TextEditingController();
   TextEditingController secondTextController = TextEditingController();
+  TextEditingController secondTimeController = TextEditingController();
   TextEditingController thirdTextController = TextEditingController();
 
   //TODO: read about VoidCallback
@@ -18,6 +19,7 @@ class DialogBox extends StatefulWidget {
     required this.onCancel,
     required this.textController,
     required this.secondTextController,
+    required this.secondTimeController,
     required this.thirdTextController,
   });
 
@@ -60,34 +62,79 @@ class _DialogBoxState extends State<DialogBox> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: widget.secondTextController,
-                    onTap: () async {
-                      DateTime? pickeddate = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2101));
+                  child: Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextField(
+                          controller: widget.secondTextController,
+                          onTap: () async {
+                            DateTime? pickeddate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2101));
+                            TimeOfDay? pickedtime = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.now(),
+                            );
 
-                      if (pickeddate != null) {
-                        setState(
-                          () {
-                            widget.secondTextController.text =
-                                DateFormat('E, d MMM yyyy HH:mm:ss')
-                                    .format(pickeddate);
+                            if (pickeddate != null) {
+                              setState(
+                                () {
+                                  widget.secondTextController.text =
+                                      DateFormat('E, d MMM yyyy')
+                                          .format(pickeddate);
+                                },
+                              );
+                            }
                           },
-                        );
-                      }
-                    },
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: 'Time',
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          widget.secondTextController.clear();
-                        },
-                        icon: const Icon(Icons.clear),
-                      ),
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            hintText: 'Time',
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                widget.secondTextController.clear();
+                              },
+                              icon: const Icon(Icons.clear),
+                            ),
+                          ),
+                        ),
+                        TextField(
+                          controller: widget.secondTextController,
+                          onTap: () async {
+                            DateTime? pickeddate = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2101));
+                            TimeOfDay? pickedtime = await showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.now(),
+                            );
+
+                            if (pickeddate != null) {
+                              setState(
+                                () {
+                                  widget.secondTextController.text =
+                                      DateFormat('E, d MMM yyyy')
+                                          .format(pickeddate);
+                                },
+                              );
+                            }
+                          },
+                          decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            hintText: 'Time',
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                widget.secondTextController.clear();
+                              },
+                              icon: const Icon(Icons.clear),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
