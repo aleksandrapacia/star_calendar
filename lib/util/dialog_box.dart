@@ -50,7 +50,7 @@ class _DialogBoxState extends State<DialogBox> {
                     controller: widget.textController,
                     decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        hintText: "What did you see?",
+                        hintText: "Observation",
                         suffixIcon: IconButton(
                             onPressed: () {
                               widget.textController.clear();
@@ -83,7 +83,7 @@ class _DialogBoxState extends State<DialogBox> {
                     },
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      hintText: 'When did you see it?',
+                      hintText: 'Time',
                       suffixIcon: IconButton(
                         onPressed: () {
                           widget.secondTextController.clear();
@@ -99,7 +99,7 @@ class _DialogBoxState extends State<DialogBox> {
                     controller: widget.thirdTextController,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      hintText: 'How did you see it?',
+                      hintText: 'Equipment: telescope, binoculars etc...',
                       suffixIcon: IconButton(
                         onPressed: () {
                           widget.thirdTextController.clear();
