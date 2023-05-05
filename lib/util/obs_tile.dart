@@ -43,7 +43,8 @@ class ObsTile extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(whatInf),
+                  child: Text(whatInf,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

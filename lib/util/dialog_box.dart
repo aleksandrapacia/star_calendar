@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
+import 'package:intl/intl.dart';
 import 'package:star_calendar/util/button.dart';
 
-class DialogBox extends StatelessWidget {
-  //
+class DialogBox extends StatefulWidget {
   TextEditingController textController = TextEditingController();
   TextEditingController secondTextController = TextEditingController();
   TextEditingController thirdTextController = TextEditingController();
@@ -20,6 +21,11 @@ class DialogBox extends StatelessWidget {
     required this.thirdTextController,
   });
 
+  @override
+  State<DialogBox> createState() => _DialogBoxState();
+}
+
+class _DialogBoxState extends State<DialogBox> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -41,35 +47,46 @@ class DialogBox extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   child: TextField(
                     // controller?
-                    controller: textController,
+                    controller: widget.textController,
                     decoration: InputDecoration(
                         border: const OutlineInputBorder(),
                         hintText: "What did you see?",
                         suffixIcon: IconButton(
                             onPressed: () {
-                              textController.clear();
+                              widget.textController.clear();
                             },
                             icon: const Icon(Icons.clear))),
                   ),
                 ),
                 Padding(
+                  //TODO: do something to make text controller equal to the value of picked date so
+                  // equal to the sate of secondTextController
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: secondTextController,
+                    controller: widget.secondTextController,
                     onTap: () async {
                       DateTime? pickeddate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2101),
-                      );
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2000),
+                          lastDate: DateTime(2101));
+
+                      if (pickeddate != null) {
+                        setState(
+                          () {
+                            widget.secondTextController.text =
+                                DateFormat('E, d MMM yyyy HH:mm:ss')
+                                    .format(pickeddate);
+                          },
+                        );
+                      }
                     },
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText: 'When did you see it?',
                       suffixIcon: IconButton(
                         onPressed: () {
-                          secondTextController.clear();
+                          widget.secondTextController.clear();
                         },
                         icon: const Icon(Icons.clear),
                       ),
@@ -79,13 +96,13 @@ class DialogBox extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: TextField(
-                    controller: thirdTextController,
+                    controller: widget.thirdTextController,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
                       hintText: 'How did you see it?',
                       suffixIcon: IconButton(
                         onPressed: () {
-                          thirdTextController.clear();
+                          widget.thirdTextController.clear();
                         },
                         icon: const Icon(Icons.clear),
                       ),
@@ -97,11 +114,11 @@ class DialogBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     // button add
-                    MyButton(text: "Save", onPressed: onSave),
+                    MyButton(text: "Save", onPressed: widget.onSave),
                     // do something to make it symmetrical
                     const SizedBox(width: 40),
                     // button cancel
-                    MyButton(text: "Cancel", onPressed: onCancel),
+                    MyButton(text: "Cancel", onPressed: widget.onCancel),
                   ],
                 ),
               ],
