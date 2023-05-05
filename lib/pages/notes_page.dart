@@ -41,6 +41,7 @@ class _NotesPageState extends State<NotesPage> {
 
   void _onFabTap(BuildContext context) {
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return DialogBox(
