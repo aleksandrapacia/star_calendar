@@ -91,7 +91,7 @@ class _DialogBoxState extends State<DialogBox> {
                           },
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            hintText: 'Time',
+                            hintText: 'Date',
                             suffixIcon: IconButton(
                               onPressed: () {
                                 widget.secondTextController.clear();
@@ -114,7 +114,7 @@ class _DialogBoxState extends State<DialogBox> {
                               setState((() => time = pickedtime));
                             }
                             widget.secondTimeController.text =
-                                '$hours:$minutes';
+                                time.format(context);
                           },
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),

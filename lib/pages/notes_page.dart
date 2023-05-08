@@ -23,6 +23,13 @@ class _NotesPageState extends State<NotesPage> {
     ["Hello", "Hi", "What is up", "Hello", false]
   ];
 
+//TODO: why it does not work ???
+  void deleteTask(int index) {
+    setState(() {
+      obsList.removeAt(index);
+    });
+  }
+
   // saving new task
   void saveObs() {
     setState(
@@ -88,13 +95,12 @@ class _NotesPageState extends State<NotesPage> {
         scrollDirection: Axis.vertical,
         itemBuilder: (context, index) {
           return ObsTile(
-            // 26:25
-
             whatInf: obsList[index][0],
             whenInf: obsList[index][1],
             whenTimeInf: obsList[index][2],
             howInf: obsList[index][3],
             observSeen: obsList[index][4],
+            deleteFunction: (context) => deleteTask,
           );
         },
       ),

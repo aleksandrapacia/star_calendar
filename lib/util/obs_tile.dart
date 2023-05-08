@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -16,6 +18,7 @@ class ObsTile extends StatelessWidget {
     required this.whenTimeInf,
     required this.howInf,
     required this.observSeen,
+    required this.deleteFunction,
   });
 
   @override
@@ -24,7 +27,7 @@ class ObsTile extends StatelessWidget {
       padding: const EdgeInsets.all(13.0),
       child: Slidable(
         endActionPane: ActionPane(
-          motion: const StretchMotion(),
+          motion: StretchMotion(),
           children: [
             SlidableAction(
                 onPressed: deleteFunction,
