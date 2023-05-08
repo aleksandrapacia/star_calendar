@@ -19,8 +19,8 @@ class _NotesPageState extends State<NotesPage> {
   final TextEditingController _thirdTextController = TextEditingController();
 
   List obsList = [
-    //  0       1         2        3
-    ["Hello", "Hi", "What is up", false]
+    //  0       1         2        3           4
+    ["Hello", "Hi", "What is up", "Hello", false]
   ];
 
   // saving new task
@@ -92,8 +92,9 @@ class _NotesPageState extends State<NotesPage> {
 
             whatInf: obsList[index][0],
             whenInf: obsList[index][1],
-            howInf: obsList[index][2],
-            observSeen: obsList[index][3],
+            whenTimeInf: obsList[index][2],
+            howInf: obsList[index][3],
+            observSeen: obsList[index][4],
           );
         },
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 class ObsTile extends StatelessWidget {
   final String whatInf;
   final String whenInf;
+  final String whenTimeInf;
   final String howInf;
   final bool observSeen;
   Function(BuildContext)? deleteFunction;
@@ -12,6 +13,7 @@ class ObsTile extends StatelessWidget {
     super.key,
     required this.whatInf,
     required this.whenInf,
+    required this.whenTimeInf,
     required this.howInf,
     required this.observSeen,
   });
@@ -43,12 +45,20 @@ class ObsTile extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: Text(whatInf,
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  child: Text(
+                    whatInf,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Text(whenInf),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: Text(
+                    whenTimeInf,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(6.0),

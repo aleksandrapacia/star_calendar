@@ -30,6 +30,10 @@ class DialogBox extends StatefulWidget {
 class _DialogBoxState extends State<DialogBox> {
   @override
   Widget build(BuildContext context) {
+    TimeOfDay time = const TimeOfDay(hour: 10, minute: 30);
+    final hours = time.hour.toString().padLeft(2, '0');
+    final minutes = time.minute.toString().padLeft(2, '0');
+
     return AlertDialog(
       title: const Center(child: Text('Form')),
       // ignore: prefer_const_constructors
@@ -62,11 +66,11 @@ class _DialogBoxState extends State<DialogBox> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),
-                  child: Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        TextField(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: TextField(
                           controller: widget.secondTextController,
                           onTap: () async {
                             DateTime? pickeddate = await showDatePicker(
@@ -74,10 +78,6 @@ class _DialogBoxState extends State<DialogBox> {
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime(2000),
                                 lastDate: DateTime(2101));
-                            TimeOfDay? pickedtime = await showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay.now(),
-                            );
 
                             if (pickeddate != null) {
                               setState(
@@ -100,42 +100,35 @@ class _DialogBoxState extends State<DialogBox> {
                             ),
                           ),
                         ),
-                        TextField(
-                          controller: widget.secondTextController,
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: widget.secondTimeController,
                           onTap: () async {
-                            DateTime? pickeddate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2101));
                             TimeOfDay? pickedtime = await showTimePicker(
                               context: context,
-                              initialTime: TimeOfDay.now(),
+                              initialTime: time,
                             );
 
-                            if (pickeddate != null) {
-                              setState(
-                                () {
-                                  widget.secondTextController.text =
-                                      DateFormat('E, d MMM yyyy')
-                                          .format(pickeddate);
-                                },
-                              );
+                            if (pickedtime != null) {
+                              setState((() => time = pickedtime));
                             }
+                            widget.secondTimeController.text =
+                                '$hours:$minutes';
                           },
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             hintText: 'Time',
                             suffixIcon: IconButton(
                               onPressed: () {
-                                widget.secondTextController.clear();
+                                widget.secondTimeController.clear();
                               },
                               icon: const Icon(Icons.clear),
                             ),
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 Padding(
@@ -160,7 +153,6 @@ class _DialogBoxState extends State<DialogBox> {
                   children: [
                     // button add
                     MyButton(text: "Save", onPressed: widget.onSave),
-                    // do something to make it symmetrical
                     const SizedBox(width: 20),
                     // button cancel
                     MyButton(text: "Cancel", onPressed: widget.onCancel),
