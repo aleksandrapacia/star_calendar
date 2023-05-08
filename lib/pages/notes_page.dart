@@ -100,7 +100,7 @@ class _NotesPageState extends State<NotesPage> {
             whenTimeInf: obsList[index][2],
             howInf: obsList[index][3],
             observSeen: obsList[index][4],
-            deleteFunction: (context) => deleteTask,
+            deleteFunction: (context) => deleteTask(index),
           );
         },
       ),
