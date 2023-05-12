@@ -20,7 +20,6 @@ class _NotesPageState extends State<NotesPage> {
 
   List obsList = [
     //  0       1         2        3           4
-    ["Hello", "Hi", "What is up", "Hello", false]
   ];
 
 //TODO: why it does not work ???

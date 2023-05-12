@@ -137,7 +137,7 @@ class _DialogBoxState extends State<DialogBox> {
                     controller: widget.thirdTextController,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      hintText: 'Equipment: telescope, binoculars etc...',
+                      hintText: 'Equip.: telescope, etc...',
                       suffixIcon: IconButton(
                         onPressed: () {
                           widget.thirdTextController.clear();
