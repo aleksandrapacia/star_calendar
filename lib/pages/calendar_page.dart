@@ -1,4 +1,4 @@
-import 'package:cr_calendar/src/cr_calendar.dart';
+import 'package:cr_calendar/cr_calendar.dart';
 import 'package:flutter/material.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -9,6 +9,21 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
+  void _showDatePicker(BuildContext context) {
+    showCrDatePicker(
+      context,
+      properties: DatePickerProperties(
+        firstWeekDay: WeekDay.monday,
+        okButtonBuilder: (onPress) =>
+            ElevatedButton(child: const Text('OK'), onPressed: () => {}),
+        cancelButtonBuilder: (onPress) =>
+            OutlinedButton(child: const Text('CANCEL'), onPressed: () => {}),
+        initialPickerDate: DateTime.now(),
+        onDateRangeSelected: (DateTime? rangeBegin, DateTime? rangeEnd) {},
+      ),
+    );
+  }
+
   final CrCalendarController _controller = CrCalendarController();
   @override
   Widget build(BuildContext context) {
@@ -17,6 +32,7 @@ class _CalendarPageState extends State<CalendarPage> {
         body: CrCalendar(
           initialDate: DateTime.now(),
           controller: _controller,
+          backgroundColor: Colors.tealAccent,
         ));
   }
 }
