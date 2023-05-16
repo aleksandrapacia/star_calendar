@@ -17,6 +17,8 @@ class _CalendarPageState extends State<CalendarPage> {
         child: TableCalendar(
             locale: "en_US",
             rowHeight: 100,
+            headerStyle: const HeaderStyle(
+                formatButtonVisible: false, titleCentered: true),
             focusedDay: DateTime.now(),
             firstDay: DateTime.utc(2020),
             lastDay: DateTime.utc(3000)),
