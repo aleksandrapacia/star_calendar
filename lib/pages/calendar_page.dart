@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -14,10 +14,13 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Calendar'), centerTitle: true),
       body: Container(
-          child: SfCalendar(
-        view: CalendarView.month,
-        monthViewSettings: const MonthViewSettings(showAgenda: true),
-      )),
+        child: TableCalendar(
+            locale: "en_US",
+            rowHeight: 100,
+            focusedDay: DateTime.now(),
+            firstDay: DateTime.utc(2020),
+            lastDay: DateTime.utc(3000)),
+      ),
     );
   }
 }

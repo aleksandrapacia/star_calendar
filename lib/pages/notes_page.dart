@@ -17,12 +17,10 @@ class _NotesPageState extends State<NotesPage> {
   final TextEditingController _secondTextController = TextEditingController();
   final TextEditingController _secondTimeController = TextEditingController();
   final TextEditingController _thirdTextController = TextEditingController();
-
   List obsList = [
     //  0       1         2        3           4
   ];
 
-//TODO: why it does not work ???
   void deleteTask(int index) {
     setState(() {
       obsList.removeAt(index);

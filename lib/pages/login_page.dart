@@ -12,8 +12,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-      title: const Text('Log in'),
-      centerTitle: true,
-    ));
+          title: const Text('Log in'),
+          centerTitle: true,
+        ),
+        body: const Text("hello"));
   }
 }

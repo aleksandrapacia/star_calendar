@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:star_calendar/pages/calendar_page.dart';
 import 'package:star_calendar/pages/login_page.dart';
 import 'package:star_calendar/pages/notes_page.dart';
+//TODO: allowing to have textTest in LoginPage()
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -14,7 +15,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final PageController _controlPages = PageController();
-  final List<Widget> _screens = [NotesPage(), CalendarPage(), LoginPage()];
+  List<Widget> get _screens => [NotesPage(), CalendarPage(), LoginPage()];
   int selectedIndex = 0;
 
   void _onPageChanged(int index) {
