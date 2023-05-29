@@ -6,7 +6,6 @@ import 'package:star_calendar/util/obs_tile.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
-
   @override
   State<NotesPage> createState() => _NotesPageState();
 }

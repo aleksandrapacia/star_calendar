@@ -24,7 +24,11 @@ class _CalendarPageState extends State<CalendarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: const FloatingActionButton(onPressed: null),
+      floatingActionButton: const FloatingActionButton(
+        onPressed: null,
+        backgroundColor: Colors.tealAccent,
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(title: const Text('Calendar'), centerTitle: true),
       body: Container(
         child: TableCalendar(

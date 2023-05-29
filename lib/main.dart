@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:star_calendar/pages/home_page.dart';
 
+const routeHome = '/';
+const routeSettings = '/settings';
+const routeMyHomePage = '/setup/';
+const routeDeviceSetupStart = '/setup/$routeMyHomePage';
+const routeNotesPage = 'notes_page';
+const routeCalendarPage = 'caledandar_page';
+
 void main() async {
   runApp(const MyApp());
 }
@@ -31,6 +38,18 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: myColor),
       home: const MyHomePage(),
+      onGenerateRoute: (settings) {
+        late Widget page;
+        if (settings.name == routeMyHomePage) {
+          page = const MyHomePage();
+        }
+        return MaterialPageRoute<dynamic>(
+          builder: (context) {
+            return page;
+          },
+          settings: settings,
+        );
+      },
     );
   }
 }
