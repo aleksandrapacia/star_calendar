@@ -3,26 +3,18 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSimplePreferences {
+  static final UserSimplePreferences _instance = UserSimplePreferences._();
+  static UserSimplePreferences getInstance() => _instance;
+
   late final SharedPreferences _preferences;
 
-  UserSimplePreferences() {
+  UserSimplePreferences._() {
     SharedPreferences.getInstance()
         .then((preferences) => _preferences = preferences);
   }
 
   Future<void> putObservation(Observation observation) async {
-    List<Observation> observations = [];
-
-    // Retrieve "old" state
-    final observationsJSONStr = _preferences.getString("observations") ?? '[]';
-    final List<dynamic> observationsJSON = jsonDecode(observationsJSONStr);
-    for (final observationJSON in observationsJSON) {
-      observations.add(Observation(
-        name: observationJSON["name"],
-        datetime: observationJSON["datetime"],
-        equipment: observationJSON["equipment"],
-      ));
-    }
+    final observations = getObservations();
 
     // Add new item to the state
     observations.add(observation);
@@ -37,6 +29,23 @@ class UserSimplePreferences {
 
           return null;
         }));
+  }
+
+  List<Observation> getObservations() {
+    List<Observation> observations = [];
+
+    // Retrieve "old" state
+    final observationsJSONStr = _preferences.getString("observations") ?? '[]';
+    final List<dynamic> observationsJSON = jsonDecode(observationsJSONStr);
+    for (final observationJSON in observationsJSON) {
+      observations.add(Observation(
+        name: observationJSON["name"],
+        datetime: observationJSON["datetime"],
+        equipment: observationJSON["equipment"],
+      ));
+    }
+
+    return observations;
   }
 }
 

@@ -1,28 +1,15 @@
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
-import 'package:intl/intl.dart';
-// ignore: unused_import
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:star_calendar/util/button.dart';
+import 'package:star_calendar/util/user_simple_prefs.dart';
 
 class DialogBox extends StatefulWidget {
-  TextEditingController textController = TextEditingController();
-  TextEditingController secondTextController = TextEditingController();
-  TextEditingController secondTimeController = TextEditingController();
-  TextEditingController thirdTextController = TextEditingController();
+  final VoidCallback onSave;
+  final void Function() onCancel;
 
-  //TODO: read about VoidCallback
-  VoidCallback onSave;
-  void Function() onCancel;
-
-  DialogBox({
+  const DialogBox({
     super.key,
     required this.onSave,
     required this.onCancel,
-    required this.textController,
-    required this.secondTextController,
-    required this.secondTimeController,
-    required this.thirdTextController,
   });
 
   @override
@@ -30,6 +17,11 @@ class DialogBox extends StatefulWidget {
 }
 
 class _DialogBoxState extends State<DialogBox> {
+  TextEditingController observationNameController = TextEditingController();
+  TextEditingController secondTextController = TextEditingController();
+  TextEditingController secondTimeController = TextEditingController();
+  TextEditingController equipmentController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     TimeOfDay time = const TimeOfDay(hour: 10, minute: 30);
@@ -45,129 +37,131 @@ class _DialogBoxState extends State<DialogBox> {
           Radius.circular(20.0),
         ),
       ),
-      content: Column(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: observationNameController,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  hintText: "Observation name",
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      observationNameController.clear();
+                    },
+                    icon: const Icon(Icons.clear),
+                  ),
+                ),
+              ),
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(10),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     children: [
+            //       Expanded(
+            //         child: TextField(
+            //           controller: widget.secondTextController,
+            //           onTap: () async {
+            //             DateTime? pickeddate = await showDatePicker(
+            //                 context: context,
+            //                 initialDate: DateTime.now(),
+            //                 firstDate: DateTime(2000),
+            //                 lastDate: DateTime(2101));
+
+            //             if (pickeddate != null) {
+            //               setState(
+            //                 () {
+            //                   widget.secondTextController.text =
+            //                       DateFormat('E, d MMM yyyy')
+            //                           .format(pickeddate);
+            //                 },
+            //               );
+            //             }
+            //           },
+            //           decoration: InputDecoration(
+            //             border: const OutlineInputBorder(),
+            //             hintText: 'Date',
+            //             suffixIcon: IconButton(
+            //               onPressed: () {
+            //                 widget.secondTextController.clear();
+            //               },
+            //               icon: const Icon(Icons.clear),
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       Expanded(
+            //         child: TextField(
+            //           controller: widget.secondTimeController,
+            //           onTap: () async {
+            //             TimeOfDay? pickedtime = await showTimePicker(
+            //               context: context,
+            //               initialTime: time,
+            //             );
+
+            //             if (pickedtime != null) {
+            //               setState((() => time = pickedtime));
+            //             }
+            //             widget.secondTimeController.text = time.format(context);
+            //           },
+            //           decoration: InputDecoration(
+            //             border: const OutlineInputBorder(),
+            //             hintText: 'Time',
+            //             suffixIcon: IconButton(
+            //               onPressed: () {
+            //                 widget.secondTimeController.clear();
+            //               },
+            //               icon: const Icon(Icons.clear),
+            //             ),
+            //           ),
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: TextField(
+                controller: equipmentController,
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  hintText: 'Equip.: telescope, etc...',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      equipmentController.clear();
+                    },
+                    icon: const Icon(Icons.clear),
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    // controller?
-                    controller: widget.textController,
-                    decoration: InputDecoration(
-                        border: const OutlineInputBorder(),
-                        hintText: "Observation",
-                        suffixIcon: IconButton(
-                            onPressed: () {
-                              widget.textController.clear();
-                            },
-                            icon: const Icon(Icons.clear))),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: widget.secondTextController,
-                          onTap: () async {
-                            DateTime? pickeddate = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(2000),
-                                lastDate: DateTime(2101));
+                // button add
+                MyButton(
+                    text: "Save",
+                    onPressed: () async {
+                      final observation = Observation(
+                        name: observationNameController.text,
+                        datetime: DateTime(2005, 4, 2, 21, 37),
+                        equipment: equipmentController.text,
+                      );
 
-                            if (pickeddate != null) {
-                              setState(
-                                () {
-                                  widget.secondTextController.text =
-                                      DateFormat('E, d MMM yyyy')
-                                          .format(pickeddate);
-                                },
-                              );
-                            }
-                          },
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            hintText: 'Date',
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                widget.secondTextController.clear();
-                              },
-                              icon: const Icon(Icons.clear),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          controller: widget.secondTimeController,
-                          onTap: () async {
-                            TimeOfDay? pickedtime = await showTimePicker(
-                              context: context,
-                              initialTime: time,
-                            );
-
-                            if (pickedtime != null) {
-                              setState((() => time = pickedtime));
-                            }
-                            widget.secondTimeController.text =
-                                time.format(context);
-                          },
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            hintText: 'Time',
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                widget.secondTimeController.clear();
-                              },
-                              icon: const Icon(Icons.clear),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: TextField(
-                    controller: widget.thirdTextController,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText: 'Equip.: telescope, etc...',
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          widget.thirdTextController.clear();
-                        },
-                        icon: const Icon(Icons.clear),
-                      ),
-                    ),
-                  ),
-                ),
-                // button 1
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // button add
-                    MyButton(
-                        text: "Save",
-                        onPressed: () async {
-                          //await UserSimplePreferences.setObservation
-                        }),
-                    const SizedBox(width: 20),
-                    // button cancel
-                    MyButton(text: "Cancel", onPressed: widget.onCancel),
-                  ],
-                ),
+                      await UserSimplePreferences.getInstance()
+                          .putObservation(observation);
+                    }),
+                const SizedBox(width: 20),
+                // button cancel
+                MyButton(text: "Cancel", onPressed: widget.onCancel),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
