@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_calendar/util/dialog_box.dart';
 import 'package:star_calendar/util/obs_tile.dart';
+import 'package:star_calendar/util/user_simple_prefs.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -12,45 +13,7 @@ class NotesPage extends StatefulWidget {
 }
 
 class _NotesPageState extends State<NotesPage> {
-  // text controller
-  final TextEditingController _textController = TextEditingController();
-  final TextEditingController _secondTextController = TextEditingController();
-  final TextEditingController _secondTimeController = TextEditingController();
-  final TextEditingController _thirdTextController = TextEditingController();
-  List obsList = [
-    //  0       1         2        3           4
-  ];
-
-  void deleteTask(int index) {
-    setState(() {
-      obsList.removeAt(index);
-    });
-  }
-
-  // saving new task
-  void saveObs() {
-    setState(
-      () {
-        obsList.add(
-          [
-            _textController.text,
-            _secondTextController.text,
-            _secondTimeController.text,
-            _thirdTextController.text,
-            false
-          ],
-        );
-
-        [
-          _textController.clear(),
-          _secondTextController.clear(),
-          _secondTimeController.clear(),
-          _thirdTextController.clear()
-        ];
-        Navigator.of(context).pop();
-      },
-    );
-  }
+  List<Observation>? observations;
 
   void _onFabTap(BuildContext context) {
     showDialog(
@@ -58,24 +21,25 @@ class _NotesPageState extends State<NotesPage> {
       context: context,
       builder: (context) {
         return DialogBox(
-          onSave: saveObs,
-          onCancel: () => [
-            _textController.clear(),
-            _secondTextController.clear(),
-            _thirdTextController.clear(),
-            Navigator.of(context).pop()
-          ],
-          textController: _textController,
-          secondTextController: _secondTextController,
-          secondTimeController: _secondTimeController,
-          thirdTextController: _thirdTextController,
+          onSave: () {},
+          onCancel: () => [Navigator.of(context).pop()],
         );
       },
     );
   }
 
   @override
-  //TODO: coś tutaj z context????
+  void initState() {
+    UserSimplePreferences.getInstance().getObservations().then((value) {
+      setState(() {
+        observations = value;
+      });
+    });
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -87,21 +51,30 @@ class _NotesPageState extends State<NotesPage> {
         title: const Text('Notes'),
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: obsList.length,
-        //shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemBuilder: (context, index) {
-          return ObsTile(
-            whatInf: obsList[index][0],
-            whenInf: obsList[index][1],
-            whenTimeInf: obsList[index][2],
-            howInf: obsList[index][3],
-            observSeen: obsList[index][4],
-            deleteFunction: (context) => deleteTask(index),
-          );
-        },
-      ),
+      body: observations == null
+          ? Center(child: Text('Loading ...'))
+          : ListView.builder(
+              itemCount: observations!.length,
+              //shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                final observation = observations![index];
+
+                final date =
+                    '${observation.datetime.year} ${observation.datetime.month} ${observation.datetime.day}';
+                final time =
+                    '${observation.datetime.hour} ${observation.datetime.minute}';
+
+                return ObservationTile(
+                    name: observation.name,
+                    date: date,
+                    time: time,
+                    equipment: observation.equipment,
+                    onDelete: () {
+                      // TODO
+                    });
+              },
+            ),
     );
   }
 }

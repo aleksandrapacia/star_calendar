@@ -6,21 +6,18 @@ class UserSimplePreferences {
   static final UserSimplePreferences _instance = UserSimplePreferences._();
   static UserSimplePreferences getInstance() => _instance;
 
-  late final SharedPreferences _preferences;
+  SharedPreferences? _preferences;
 
-  UserSimplePreferences._() {
-    SharedPreferences.getInstance()
-        .then((preferences) => _preferences = preferences);
-  }
+  UserSimplePreferences._();
 
   Future<void> putObservation(Observation observation) async {
-    final observations = getObservations();
+    final observations = await getObservations();
 
     // Add new item to the state
     observations.add(observation);
 
     // Persist new state
-    await _preferences.setString(
+    await _preferences?.setString(
         "observations",
         json.encode(observations, toEncodable: (object) {
           if (object is Observation) {
@@ -31,11 +28,13 @@ class UserSimplePreferences {
         }));
   }
 
-  List<Observation> getObservations() {
+  Future<List<Observation>> getObservations() async {
+    _preferences ??= await SharedPreferences.getInstance();
+
     List<Observation> observations = [];
 
     // Retrieve "old" state
-    final observationsJSONStr = _preferences.getString("observations") ?? '[]';
+    final observationsJSONStr = _preferences?.getString("observations") ?? '[]';
     final List<dynamic> observationsJSON = jsonDecode(observationsJSONStr);
     for (final observationJSON in observationsJSON) {
       observations.add(Observation(

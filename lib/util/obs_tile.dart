@@ -3,22 +3,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class ObsTile extends StatelessWidget {
-  final String whatInf;
-  final String whenInf;
-  final String whenTimeInf;
-  final String howInf;
-  final bool observSeen;
-  Function(BuildContext)? deleteFunction;
+class ObservationTile extends StatelessWidget {
+  final String name;
+  final String date;
+  final String time;
+  final String equipment;
+  final void Function() onDelete;
 
-  ObsTile({
+  const ObservationTile({
     super.key,
-    required this.whatInf,
-    required this.whenInf,
-    required this.whenTimeInf,
-    required this.howInf,
-    required this.observSeen,
-    required this.deleteFunction,
+    required this.name,
+    required this.date,
+    required this.time,
+    required this.equipment,
+    required this.onDelete,
   });
 
   @override
@@ -30,7 +28,9 @@ class ObsTile extends StatelessWidget {
           motion: StretchMotion(),
           children: [
             SlidableAction(
-                onPressed: deleteFunction,
+                onPressed: (context) {
+                  onDelete();
+                },
                 icon: Icons.delete,
                 borderRadius: BorderRadius.circular(5),
                 backgroundColor: Colors.red.shade300),
@@ -49,23 +49,21 @@ class ObsTile extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(6.0),
                   child: Text(
-                    whatInf,
+                    name,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: Text(whenInf),
+                  child: Text(date),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: Text(
-                    whenTimeInf,
-                  ),
+                  child: Text(time),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(6.0),
-                  child: Text(howInf),
+                  child: Text(equipment),
                 )
               ],
             ),
