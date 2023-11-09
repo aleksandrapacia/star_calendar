@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:star_calendar/util/button.dart';
 import 'package:star_calendar/util/user_simple_prefs.dart';
 
@@ -19,6 +20,7 @@ class DialogBox extends StatefulWidget {
 class _DialogBoxState extends State<DialogBox> {
   TextEditingController observationNameController = TextEditingController();
   TextEditingController secondTextController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
   TextEditingController secondTimeController = TextEditingController();
   TextEditingController equipmentController = TextEditingController();
 
@@ -57,72 +59,71 @@ class _DialogBoxState extends State<DialogBox> {
                 ),
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(10),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     children: [
-            //       Expanded(
-            //         child: TextField(
-            //           controller: widget.secondTextController,
-            //           onTap: () async {
-            //             DateTime? pickeddate = await showDatePicker(
-            //                 context: context,
-            //                 initialDate: DateTime.now(),
-            //                 firstDate: DateTime(2000),
-            //                 lastDate: DateTime(2101));
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: dateController,
+                      onTap: () async {
+                        DateTime? pickeddate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2101));
 
-            //             if (pickeddate != null) {
-            //               setState(
-            //                 () {
-            //                   widget.secondTextController.text =
-            //                       DateFormat('E, d MMM yyyy')
-            //                           .format(pickeddate);
-            //                 },
-            //               );
-            //             }
-            //           },
-            //           decoration: InputDecoration(
-            //             border: const OutlineInputBorder(),
-            //             hintText: 'Date',
-            //             suffixIcon: IconButton(
-            //               onPressed: () {
-            //                 widget.secondTextController.clear();
-            //               },
-            //               icon: const Icon(Icons.clear),
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //       Expanded(
-            //         child: TextField(
-            //           controller: widget.secondTimeController,
-            //           onTap: () async {
-            //             TimeOfDay? pickedtime = await showTimePicker(
-            //               context: context,
-            //               initialTime: time,
-            //             );
+                        if (pickeddate != null) {
+                          setState(
+                            () {
+                              dateController.text = DateFormat('E, d MMM yyyy')
+                                  .format(pickeddate);
+                            },
+                          );
+                        }
+                      },
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText: 'Date',
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            dateController.clear();
+                          },
+                          icon: const Icon(Icons.clear),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: TextField(
+                      controller: secondTimeController,
+                      onTap: () async {
+                        TimeOfDay? pickedtime = await showTimePicker(
+                          context: context,
+                          initialTime: time,
+                        );
 
-            //             if (pickedtime != null) {
-            //               setState((() => time = pickedtime));
-            //             }
-            //             widget.secondTimeController.text = time.format(context);
-            //           },
-            //           decoration: InputDecoration(
-            //             border: const OutlineInputBorder(),
-            //             hintText: 'Time',
-            //             suffixIcon: IconButton(
-            //               onPressed: () {
-            //                 widget.secondTimeController.clear();
-            //               },
-            //               icon: const Icon(Icons.clear),
-            //             ),
-            //           ),
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
+                        if (pickedtime != null) {
+                          setState((() => time = pickedtime));
+                        }
+                        secondTimeController.text = time.format(context);
+                      },
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText: 'Time',
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            secondTimeController.clear();
+                          },
+                          icon: const Icon(Icons.clear),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextField(
@@ -144,17 +145,20 @@ class _DialogBoxState extends State<DialogBox> {
               children: [
                 // button add
                 MyButton(
-                    text: "Save",
-                    onPressed: () async {
-                      final observation = Observation(
-                        name: observationNameController.text,
-                        datetime: DateTime(2005, 4, 2, 21, 37),
-                        equipment: equipmentController.text,
-                      );
+                  text: "Save",
+                  onPressed: () async {
+                    final observation = Observation(
+                      name: observationNameController.text,
+                      datetime: DateTime(2005, 4, 2, 21, 37),
+                      equipment: equipmentController.text,
+                    );
 
-                      await UserSimplePreferences.getInstance()
-                          .putObservation(observation);
-                    }),
+                    await UserSimplePreferences.getInstance()
+                        .putObservation(observation);
+
+                    widget.onSave();
+                  },
+                ),
                 const SizedBox(width: 20),
                 // button cancel
                 MyButton(text: "Cancel", onPressed: widget.onCancel),

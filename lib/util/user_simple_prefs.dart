@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uuid/uuid.dart';
 
 class UserSimplePreferences {
   static final UserSimplePreferences _instance = UserSimplePreferences._();
@@ -11,21 +12,26 @@ class UserSimplePreferences {
   UserSimplePreferences._();
 
   Future<void> putObservation(Observation observation) async {
+    _preferences ??= await SharedPreferences.getInstance();
+
     final observations = await getObservations();
 
     // Add new item to the state
     observations.add(observation);
 
     // Persist new state
-    await _preferences?.setString(
-        "observations",
-        json.encode(observations, toEncodable: (object) {
-          if (object is Observation) {
-            return object.toJson();
-          }
+    await _preferences?.setString("observations", json.encode(observations));
+  }
 
-          return null;
-        }));
+  Future<void> deleteObservation(String id) async {
+    _preferences ??= await SharedPreferences.getInstance();
+
+    final observations = await getObservations();
+
+    observations.removeWhere((observation) => observation.id == id);
+
+    // Persist new state
+    await _preferences?.setString("observations", json.encode(observations));
   }
 
   Future<List<Observation>> getObservations() async {
@@ -37,18 +43,17 @@ class UserSimplePreferences {
     final observationsJSONStr = _preferences?.getString("observations") ?? '[]';
     final List<dynamic> observationsJSON = jsonDecode(observationsJSONStr);
     for (final observationJSON in observationsJSON) {
-      observations.add(Observation(
-        name: observationJSON["name"],
-        datetime: observationJSON["datetime"],
-        equipment: observationJSON["equipment"],
-      ));
+      observations.add(Observation.fromJson(observationJSON));
     }
 
     return observations;
   }
 }
 
+const _uuid = Uuid();
+
 class Observation {
+  final String id;
   final String name;
   final DateTime datetime;
   final String equipment;
@@ -57,23 +62,20 @@ class Observation {
     required this.name,
     required this.datetime,
     required this.equipment,
-  });
+  }) : id = _uuid.v4();
 
-  String toJson() {
-    return json.encode({
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
       "name": name,
-      "datetime": datetime,
+      "datetime": datetime.toIso8601String(),
       "equipment": equipment,
-    });
+    };
   }
 
-  static Observation fromJson(String data) {
-    final Map<String, dynamic> map = json.decode(data);
-
-    return Observation(
-      name: map["name"],
-      datetime: map["datetime"],
-      equipment: map["equipment"],
-    );
-  }
+  Observation.fromJson(Map<String, dynamic> data)
+      : id = data["id"],
+        name = data["name"],
+        datetime = DateTime.parse(data["datetime"]),
+        equipment = data["equipment"];
 }

@@ -52,8 +52,6 @@ class SetupFlow extends StatefulWidget {
 }
 
 class SetupFlowState extends State<SetupFlow> {
-  final navigatorKey = GlobalKey<NavigatorState>();
-
   @override
   void initState() {
     super.initState();
@@ -61,7 +59,6 @@ class SetupFlowState extends State<SetupFlow> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     throw UnimplementedError();
   }
 }

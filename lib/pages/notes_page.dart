@@ -21,21 +21,32 @@ class _NotesPageState extends State<NotesPage> {
       context: context,
       builder: (context) {
         return DialogBox(
-          onSave: () {},
+          onSave: () {
+            Navigator.of(context).pop();
+            _refreshObservations();
+          },
           onCancel: () => [Navigator.of(context).pop()],
         );
       },
     );
   }
 
-  @override
-  void initState() {
+  Future<void> _deleteObservation(String id) async {
+    await UserSimplePreferences.getInstance().deleteObservation(id);
+    _refreshObservations();
+  }
+
+  void _refreshObservations() {
     UserSimplePreferences.getInstance().getObservations().then((value) {
       setState(() {
         observations = value;
       });
     });
+  }
 
+  @override
+  void initState() {
+    _refreshObservations();
     super.initState();
   }
 
@@ -66,12 +77,13 @@ class _NotesPageState extends State<NotesPage> {
                     '${observation.datetime.hour} ${observation.datetime.minute}';
 
                 return ObservationTile(
+                    // key: Key(observation.id),
                     name: observation.name,
                     date: date,
                     time: time,
                     equipment: observation.equipment,
                     onDelete: () {
-                      // TODO
+                      _deleteObservation(observation.id);
                     });
               },
             ),

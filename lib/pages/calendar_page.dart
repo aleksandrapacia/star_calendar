@@ -11,7 +11,7 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage> {
   //final _onFabTap onfabtap;
-
+  DateTime? _selectedDay;
   DateTime today = DateTime.now();
   void _onDaySelelected(DateTime day, DateTime focusedDay) {
     setState(() {
@@ -39,7 +39,7 @@ class _CalendarPageState extends State<CalendarPage> {
           firstDay: DateTime.utc(2020),
           lastDay: DateTime.utc(3000),
           onDaySelected: _onDaySelelected,
-          selectedDayPredicate: (day) => isSameDay(day, today),
+          selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
           availableGestures: AvailableGestures.all,
         ),
       ),
